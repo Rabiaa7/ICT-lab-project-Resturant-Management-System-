@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>motu pizza</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        background-image: url('image.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: #f6f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container {
+        display: flex;
+        width: 80%;
+        height: 70%;
+        background-color: rgba(0,0,0,0.5);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+
+    .left-section {
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+    }
+
+    .right-section {
+        flex: 1;
+        border-left: 3px solid #f4f2ef;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    button {
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 5px;
+        background-color: #f4f2ef;
+        color: #1e1919;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #08544a;
+        color: #f4f2ef;
+    }
+
+    .button-group {
+        display: flex;
+        gap: 20px;
+        margin-top: 25px;
+    }
+
+    h1, h2 {
+        margin: 10px 0;
+    }
+
+    .about-us {
+        text-align: center;
+    }
+
+    .about-us h2 {
+        margin-bottom: 15px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="left-section">
+        <h2>Welcome to</h2>
+        <h1> DOUBLE U PIZZA</h1>
+
+        <div class="button-group">
+            <button id="lookMenuBtn">LOOK MENU</button>
+            <button id="bookTableBtn">BOOK A TABLE</button>
+        </div>
+    </div>
+
+    <div class="right-section">
+        <div class="about-us">
+            <h2>About Us</h2>
+            <p>Double U Pizza brings you the finest gourmet pizzas with fresh ingredients and unique flavors.
+                <ul>
+                    <li><b><em style="color: #c6c5ccd7;">Contact:</em></b> +92 589 2589 </li><br>
+                    <li><b><em style="color: #cacdd5ee;">Email:</em></b> 
+                    <a style="color: #f4f2ef;" href="https://mail.google.com" target="_blank">DoubleUpizza@gmail.com</a>
+                    </li>
+                </ul>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("lookMenuBtn").addEventListener("click", function() {
+        window.location.href = "menu.html";
+    });
+
+    document.getElementById("bookTableBtn").addEventListener("click", function() {
+        window.location.href = "form.html";
+    });
+</script>
+
+</body>
+</html>

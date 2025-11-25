@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pizza Menu — The Oven Spot</title>
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --card:#1f1b17;
+      --accent:#b85c1a;
+      --muted:#cfc6bf;
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box;}
+
+    body{
+      margin:0;
+      min-height:100vh;
+
+      background:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)),
+        url('image.jpg') no-repeat center center fixed;
+      background-size: cover;
+
+      color:var(--muted);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding:28px;
+    }
+
+    main{
+      width:100%;
+      max-width:1100px;
+      padding:20px;
+      border: 3px solid var(--accent);
+      border-radius:20px;
+      box-shadow: 0 0 40px rgba(184,92,26,0.5);
+
+      background: rgba(0,0,0,0.15);
+      backdrop-filter: blur(8px);
+    }
+
+    h2.section-title {
+      font-size: 30px;
+      font-weight: 800;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #b85c1a, #ff8c42);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      position: relative;
+      text-align:center;
+    }
+    h2.section-title::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -8px;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #b85c1a, #ff8c42);
+      border-radius: 2px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom:40px;
+
+      background: url("picture.PNG") no-repeat center center;
+      background-size: cover;
+
+      padding: 20px;
+      border-radius: 20px;
+    }
+
+    .card{
+      background: rgba(0,0,0,0.45);
+      border-radius:var(--radius);
+      padding:16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
+      backdrop-filter: blur(6px);
+    }
+    .card:hover{
+      transform: translateY(-6px);
+      box-shadow: 0 10px 30px rgba(184,92,26,0.6);
+    }
+
+    .card h3{margin:0 0 6px 0;font-size:18px;font-weight:700;}
+    .desc{font-size:14px;color:#d8d1c9;margin-bottom:10px}
+    .meta{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap;}
+
+    .price{font-weight:700;color:var(--accent)}
+
+    /* 🔥 ADDED: Price + Size Text Black */
+    .price,
+    .price div {
+      color: rgb(245, 216, 216) !important;
+      font-weight: 700;
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      transition: transform 0.3s;
+      border: 2px solid var(--accent);
+    }
+    .card img:hover {transform: scale(1.05);}
+    
+    footer{
+      width:100%;
+      max-width:1100px;
+      margin-top:30px;
+      color:#a69f98;
+      font-size:13px;
+      text-align:center;
+    }
+
+    @media (max-width:700px){
+      .grid {grid-template-columns: 1fr;}
+      main{padding:16px;}
+    }
+  </style>
+</head>
+
+<body>
+
+  <main>
+    <h2 class="section-title">Double U <br>Pizza Menu</h2>
+    <section class="grid" id="menuGrid"></section>
+
+    <h2 class="section-title">Appetizers</h2>
+    <section class="grid" id="appetizerGrid"></section>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const pizzas = [
+      {id:1,name:'Margherita Pizza',desc:'Tomato sauce, mozzarella, basil',price:1200,img:'margirita.jpeg'},
+      {id:2,name:'Pepperoni Pizza',desc:'Loaded with spicy pepperoni',price:1400,img:'peproni.jpeg'},
+      {id:3,name:'Chicken Tikka Pizza',desc:'Spicy tikka chicken, onions',price:1500,img:'chickentikka.jpg'},
+      {id:4,name:'BBQ Chicken Pizza',desc:'BBQ sauce, grilled chicken',price:1500,img:'bbq.jpg'},
+      {id:5,name:'Veggie Supreme Pizza',desc:'Capsicum, mushrooms, olives',price:1300,img:'veggie.jpeg'},
+      {id:6,name:'Fajita Pizza',desc:'Chicken fajita, jalapenos, cheese',price:1480,img:'fajita.webp'},
+      {id:7,name:'Spicy Peri-Peri Pizza',desc:'Peri-peri chicken, onions',price:1480,img:'picture.png'},
+      {id:8,name:'Hawaiian Pizza',desc:'Chicken + pineapple combo',price:1400,img:'periperi.jpg'},
+      {id:9,name:'Ranch Pizza',desc:'Creamy ranch sauce, chicken, onions, cheese',price:1550,img:'ranch.jpg'}
+    ];
+
+    const appetizers = [
+      {id:1,name:'Garlic Bread',desc:'Freshly baked, buttery garlic bread',price:550,img:'garlic_bread.jpeg'},
+      {id:2,name:'French Fries',desc:'Crispy golden fries',price:400,img:'fries.jpg'},
+      {id:3,name:'Cold Drink',desc:'Chilled soft drink',price:200,img:'colddrink.png'},
+      {id:4,name:'Pizza Fries',desc:'Fries topped with cheese and spices',price:500,img:'pizzafries.jpeg'},
+      {id:5,name:'Onion Rings',desc:'Crispy battered onion rings',price:400,img:'onionring.jpeg'}
+    ];
+
+    const sizes = {Small:0.8, Medium:1, Large:1.3};
+
+    function formatPrice(n){return 'Rs ' + n.toFixed(0)}
+
+    function renderMenu(){
+      const grid = document.getElementById('menuGrid');
+      grid.innerHTML = '';
+      pizzas.forEach(p => {
+        const card = document.createElement('div'); 
+        card.className='card';
+        let sizeOptions = '';
+        for (let size in sizes){
+          let price = p.price * sizes[size];
+          sizeOptions += `<div>${size}: ${formatPrice(price)}</div>`;
+        }
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.name}">
+          <h3>${p.name}</h3>
+          <div class="desc">${p.desc}</div>
+          <div class="meta"><div class="price">${sizeOptions}</div></div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function renderAppetizers(){
+      const grid = document.getElementById('appetizerGrid');
+      grid.innerHTML = '';
+      appetizers.forEach(a => {
+        const card = document.createElement('div'); 
+        card.className='card';
+        card.innerHTML = `
+          <img src="${a.img}" alt="${a.name}">
+          <h3>${a.name}</h3>
+          <div class="desc">${a.desc}</div>
+          <div class="meta"><div class="price">${formatPrice(a.price)}</div></div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    renderMenu();
+    renderAppetizers();
+  </script>
+  <a href="tittle.html" style="color:white; font-size:18px;">⬅ Back to Home</a>
+
+</body>
+</html>
